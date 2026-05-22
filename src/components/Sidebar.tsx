@@ -15,7 +15,8 @@ import {
   Bell,
   Menu,
   X,
-  CreditCard
+  CreditCard,
+  UserCircle
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -121,10 +122,10 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             isOpen={isOpen}
           />
           <SidebarItem 
-            icon={Users} 
-            label="Users" 
-            isActive={activeView === 'users'} 
-            onClick={() => setView('users')}
+            icon={UserCircle} 
+            label="Customers" 
+            isActive={activeView === 'customers'} 
+            onClick={() => setView('customers')}
             isOpen={isOpen}
           />
         </div>
@@ -163,15 +164,6 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             <SubItem label="Insurance" isActive={activeView === 'payment-insurance'} onClick={() => setView('payment-insurance')} />
             <SubItem label="Rentals" isActive={activeView === 'payment-rentals'} onClick={() => setView('payment-rentals')} />
           </SidebarItem>
-
-          <SidebarItem 
-            icon={Users} 
-            label="Contacts" 
-            isActive={activeView.startsWith('contacts')} 
-            isOpen={isOpen}
-          >
-            <SubItem label="Customers" isActive={activeView === 'contacts-customers'} onClick={() => setView('contacts-customers')} />
-          </SidebarItem>
         </div>
 
         <div>
@@ -198,6 +190,13 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
       {/* User Footer */}
       <div className={cn("p-4 border-t border-[#27272a] space-y-2", !isOpen && "px-2")}>
         <SidebarItem icon={Settings} label="Settings" isActive={activeView === 'settings'} onClick={() => setView('settings')} isOpen={isOpen} />
+        <SidebarItem 
+          icon={Users} 
+          label="Users" 
+          isActive={activeView === 'users'} 
+          onClick={() => setView('users')}
+          isOpen={isOpen}
+        />
         <button className={cn(
           "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-400 hover:text-white transition-colors group",
           !isOpen && "justify-center"

@@ -111,7 +111,7 @@ export default function App() {
         return <LiveMap />;
       case 'fleet-maintenance':
         return <FleetMaintenance />;
-      case 'contacts-customers':
+      case 'customers':
         return <CustomerManagement />;
       case 'fleet-inventory':
         return <FleetInventory setView={setActiveView} />;
