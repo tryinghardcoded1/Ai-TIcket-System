@@ -50,9 +50,9 @@ export default function Finance() {
   const [maintenanceLogs, setMaintenanceLogs] = useState<any[]>([]);
   const [customTransactions, setCustomTransactions] = useState<CustomTransaction[]>([]);
   const [ledgerBases, setLedgerBases] = useState<LedgerBases>({
-    revenueBase: 84200,
-    outstandingBase: 12400,
-    opsCostBase: 31800
+    revenueBase: 0,
+    outstandingBase: 0,
+    opsCostBase: 0
   });
 
   const [loading, setLoading] = useState(true);
@@ -70,9 +70,9 @@ export default function Finance() {
   const [txDesc, setTxDesc] = useState('');
 
   // Editing base metrics inputs
-  const [baseRevInput, setBaseRevInput] = useState(84200);
-  const [baseOutInput, setBaseOutInput] = useState(12400);
-  const [baseOpsInput, setBaseOpsInput] = useState(31800);
+  const [baseRevInput, setBaseRevInput] = useState(0);
+  const [baseOutInput, setBaseOutInput] = useState(0);
+  const [baseOpsInput, setBaseOpsInput] = useState(0);
 
   useEffect(() => {
     if (!db) return;
@@ -83,13 +83,13 @@ export default function Finance() {
       if (docSnap.exists()) {
         const val = docSnap.data() as LedgerBases;
         setLedgerBases({
-          revenueBase: Number(val.revenueBase) ?? 84200,
-          outstandingBase: Number(val.outstandingBase) ?? 12400,
-          opsCostBase: Number(val.opsCostBase) ?? 31800
+          revenueBase: Number(val.revenueBase) ?? 0,
+          outstandingBase: Number(val.outstandingBase) ?? 0,
+          opsCostBase: Number(val.opsCostBase) ?? 0
         });
-        setBaseRevInput(Number(val.revenueBase) ?? 84200);
-        setBaseOutInput(Number(val.outstandingBase) ?? 12400);
-        setBaseOpsInput(Number(val.opsCostBase) ?? 31800);
+        setBaseRevInput(Number(val.revenueBase) ?? 0);
+        setBaseOutInput(Number(val.outstandingBase) ?? 0);
+        setBaseOpsInput(Number(val.opsCostBase) ?? 0);
       }
     });
 
@@ -176,12 +176,18 @@ export default function Finance() {
   // Monthly breakdown for Reports Chart
   const getDynamicMonthlyData = () => {
     const historicalBase = [
-      { month: 'Jan', maintenance: 4500, revenue: 15200 },
-      { month: 'Feb', maintenance: 3200, revenue: 14800 },
-      { month: 'Mar', maintenance: 5100, revenue: 18500 },
-      { month: 'Apr', maintenance: 2800, revenue: 21000 },
-      { month: 'May', maintenance: 4100, revenue: 24500 },
-      { month: 'Jun', maintenance: 3800, revenue: 26800 },
+      { month: 'Jan', maintenance: 0, revenue: 0 },
+      { month: 'Feb', maintenance: 0, revenue: 0 },
+      { month: 'Mar', maintenance: 0, revenue: 0 },
+      { month: 'Apr', maintenance: 0, revenue: 0 },
+      { month: 'May', maintenance: 0, revenue: 0 },
+      { month: 'Jun', maintenance: 0, revenue: 0 },
+      { month: 'Jul', maintenance: 0, revenue: 0 },
+      { month: 'Aug', maintenance: 0, revenue: 0 },
+      { month: 'Sep', maintenance: 0, revenue: 0 },
+      { month: 'Oct', maintenance: 0, revenue: 0 },
+      { month: 'Nov', maintenance: 0, revenue: 0 },
+      { month: 'Dec', maintenance: 0, revenue: 0 },
     ];
 
     // Overlay database records on baseline

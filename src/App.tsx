@@ -161,6 +161,30 @@ export default function App() {
             </div>
           </div>
         );
+      case 'payment-fines':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center text-red-500">
+               <span className="text-2xl font-bold italic">FIN</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Fines & Penalties</h2>
+              <p className="text-slate-500 text-sm">Fines payment tracking module is under construction.</p>
+            </div>
+          </div>
+        );
+      case 'forms':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl flex items-center justify-center text-amber-500">
+               <span className="text-2xl font-bold italic">FRM</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Form Generator</h2>
+              <p className="text-slate-500 text-sm">Form generator module is under construction.</p>
+            </div>
+          </div>
+        );
       case 'settings':
         return <SystemSettings user={user} />;
       default:

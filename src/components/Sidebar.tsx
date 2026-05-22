@@ -16,7 +16,8 @@ import {
   Menu,
   X,
   CreditCard,
-  UserCircle
+  UserCircle,
+  ClipboardList
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -163,7 +164,16 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
           >
             <SubItem label="Insurance" isActive={activeView === 'payment-insurance'} onClick={() => setView('payment-insurance')} />
             <SubItem label="Rentals" isActive={activeView === 'payment-rentals'} onClick={() => setView('payment-rentals')} />
+            <SubItem label="Fines" isActive={activeView === 'payment-fines'} onClick={() => setView('payment-fines')} />
           </SidebarItem>
+
+          <SidebarItem 
+            icon={ClipboardList} 
+            label="Forms" 
+            isActive={activeView === 'forms'} 
+            onClick={() => setView('forms')}
+            isOpen={isOpen}
+          />
         </div>
 
         <div>

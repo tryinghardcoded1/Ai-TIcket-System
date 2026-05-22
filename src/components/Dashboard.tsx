@@ -26,13 +26,13 @@ import { useNotifications } from '../context/NotificationContext';
 import { NotificationType } from '../services/notificationService';
 
 const data = [
-  { name: 'Mon', revenue: 4000, bookings: 2400 },
-  { name: 'Tue', revenue: 3000, bookings: 1398 },
-  { name: 'Wed', revenue: 2000, bookings: 9800 },
-  { name: 'Thu', revenue: 2780, bookings: 3908 },
-  { name: 'Fri', revenue: 1890, bookings: 4800 },
-  { name: 'Sat', revenue: 2390, bookings: 3800 },
-  { name: 'Sun', revenue: 3490, bookings: 4300 },
+  { name: 'Mon', revenue: 0, bookings: 0 },
+  { name: 'Tue', revenue: 0, bookings: 0 },
+  { name: 'Wed', revenue: 0, bookings: 0 },
+  { name: 'Thu', revenue: 0, bookings: 0 },
+  { name: 'Fri', revenue: 0, bookings: 0 },
+  { name: 'Sat', revenue: 0, bookings: 0 },
+  { name: 'Sun', revenue: 0, bookings: 0 },
 ];
 
 const StatCard = ({ label, value, trend, icon: Icon, color }: any) => (
@@ -121,10 +121,10 @@ export default function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard label="Total Revenue" value="$42,390" trend={12} icon={TrendingUp} color="bg-indigo-500" />
-        <StatCard label="Active Rentals" value="18" trend={4} icon={Car} color="bg-emerald-500" />
-        <StatCard label="Total Customers" value="1,280" trend={8} icon={Users} color="bg-blue-500" />
-        <StatCard label="Pending Tasks" value="4" trend={-2} icon={Clock} color="bg-amber-500" />
+        <StatCard label="Total Revenue" value="$0" trend={0} icon={TrendingUp} color="bg-indigo-500" />
+        <StatCard label="Active Rentals" value="0" trend={0} icon={Car} color="bg-emerald-500" />
+        <StatCard label="Total Customers" value="0" trend={0} icon={Users} color="bg-blue-500" />
+        <StatCard label="Pending Tasks" value="0" trend={0} icon={Clock} color="bg-amber-500" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
