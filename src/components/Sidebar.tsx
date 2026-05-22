@@ -14,7 +14,8 @@ import {
   Settings,
   Bell,
   Menu,
-  X
+  X,
+  CreditCard
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -151,6 +152,16 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             <SubItem label="Inventory" isActive={activeView === 'fleet-inventory'} onClick={() => setView('fleet-inventory')} />
             <SubItem label="Live Map" isActive={activeView === 'fleet-map'} onClick={() => setView('fleet-map')} />
             <SubItem label="Maintenance" isActive={activeView === 'fleet-maintenance'} onClick={() => setView('fleet-maintenance')} />
+          </SidebarItem>
+
+          <SidebarItem 
+            icon={CreditCard} 
+            label="Payment" 
+            isActive={activeView.startsWith('payment')} 
+            isOpen={isOpen}
+          >
+            <SubItem label="Insurance" isActive={activeView === 'payment-insurance'} onClick={() => setView('payment-insurance')} />
+            <SubItem label="Rentals" isActive={activeView === 'payment-rentals'} onClick={() => setView('payment-rentals')} />
           </SidebarItem>
 
           <SidebarItem 

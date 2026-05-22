@@ -137,6 +137,30 @@ export default function App() {
         return <ReservationManagement setView={setActiveView} />;
       case 'agreement':
         return <RentalAgreement onBack={() => setActiveView('ops-reservations')} />;
+      case 'payment-insurance':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500">
+               <span className="text-2xl font-bold italic">INS</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Insurance Payments</h2>
+              <p className="text-slate-500 text-sm">Insurance payment tracking module is under construction.</p>
+            </div>
+          </div>
+        );
+      case 'payment-rentals':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500">
+               <span className="text-2xl font-bold italic">RNT</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Rental Payments</h2>
+              <p className="text-slate-500 text-sm">Rental payment tracking module is under construction.</p>
+            </div>
+          </div>
+        );
       case 'settings':
         return <SystemSettings user={user} />;
       default:
