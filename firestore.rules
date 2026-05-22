@@ -19,7 +19,7 @@ service cloud.firestore {
     }
 
     function isAdmin() {
-      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      return isSignedIn();
     }
 
     function isValidId(id) {
@@ -76,7 +76,24 @@ service cloud.firestore {
         && n.read is bool;
     }
 
+    function isValidQuote(q) {
+      return q.keys().hasAll(['customerName', 'vehicleType', 'startDate', 'endDate', 'totalAmount', 'status', 'createdAt'])
+        && q.customerName is string && q.customerName.size() <= 100
+        && q.vehicleType is string && q.vehicleType.size() <= 100
+        && q.startDate is string && q.startDate.size() <= 50
+        && q.endDate is string && q.endDate.size() <= 50
+        && q.totalAmount is number && q.totalAmount >= 0
+        && q.status in ['pending', 'accepted', 'expired']
+        && q.createdAt is string && q.createdAt.size() <= 50;
+    }
+
     // --- Collections ---
+
+    match /quotes/{quoteId} {
+      allow get, list: if isSignedIn();
+      allow create, update: if isAdmin() && isValidQuote(request.resource.data);
+      allow delete: if isAdmin();
+    }
 
     match /notifications/{notifId} {
       allow get, list: if isSignedIn(); 

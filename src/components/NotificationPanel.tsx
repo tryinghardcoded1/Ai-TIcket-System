@@ -21,7 +21,7 @@ interface NotificationPanelProps {
 }
 
 export default function NotificationPanel({ isOpen, onClose }: NotificationPanelProps) {
-  const { notifications, markAsRead, deleteNotification, unreadCount } = useNotifications();
+  const { notifications, markAsRead, deleteNotification, clearAllNotifications, unreadCount } = useNotifications();
 
   const getIcon = (type: NotificationType) => {
     switch (type) {
@@ -135,6 +135,7 @@ export default function NotificationPanel({ isOpen, onClose }: NotificationPanel
 
             <div className="p-4 border-t border-[#27272a] bg-[#111113]/50">
               <button 
+                onClick={clearAllNotifications}
                 className="w-full py-3 bg-zinc-900 border border-[#27272a] text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl hover:text-white hover:border-zinc-700 transition-all flex items-center justify-center gap-2"
               >
                 Clear Managed Records

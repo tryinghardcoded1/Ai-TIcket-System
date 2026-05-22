@@ -8,6 +8,7 @@ interface NotificationContextType {
   unreadCount: number;
   markAsRead: (id: string) => Promise<void>;
   deleteNotification: (id: string) => Promise<void>;
+  clearAllNotifications: () => Promise<void>;
   simulateNotification: (title: string, message: string, type: NotificationType) => Promise<void>;
 }
 
@@ -58,6 +59,15 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
   const deleteNotification = async (id: string) => {
     await notificationService.delete(id);
   };
+  
+  const clearAllNotifications = async () => {
+    // Iterate and delete all, or implement a batch delete in service
+    for (const n of notifications) {
+      if (n.id) {
+        await notificationService.delete(n.id);
+      }
+    }
+  };
 
   const simulateNotification = async (title: string, message: string, type: NotificationType) => {
     await notificationService.send({
@@ -74,6 +84,7 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
       unreadCount, 
       markAsRead, 
       deleteNotification,
+      clearAllNotifications,
       simulateNotification
     }}>
       {children}

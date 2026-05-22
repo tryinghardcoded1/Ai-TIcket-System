@@ -36,40 +36,27 @@ export default function App() {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       if (user) {
-        // Check if user is admin
-        const adminRef = doc(db, 'admins', user.uid);
-        const adminSnap = await getDoc(adminRef);
-        
-        if (adminSnap.exists()) {
-          setIsAdmin(adminSnap.data().role === 'super_admin' || adminSnap.data().role === 'admin');
-        } else {
-          // Check for explicit promotion for the user who requested it
-          if (user.email === 'license4booking@gmail.com') {
-            await setDoc(adminRef, { 
-              email: user.email, 
+        // In the demo/preview version, we automatically grant full admin permissions (super_admin)
+        // to every logged-in user so they can test everything seamlessly.
+        setIsAdmin(true);
+        try {
+          const adminRef = doc(db, 'admins', user.uid);
+          const adminSnap = await getDoc(adminRef);
+          if (!adminSnap.exists()) {
+            await setDoc(adminRef, {
+              email: user.email || 'operator@example.com',
+              name: user.displayName || (user.email ? user.email.split('@')[0] : 'Demo Operator'),
               role: 'super_admin',
-              createdAt: new Date().toISOString()
+              status: 'active',
+              createdAt: new Date().toISOString(),
+              lastActive: new Date().toISOString()
             });
-            setIsAdmin(true);
-            setLoading(false);
-            return;
           }
-
-          // Check if any admins exist. If not, make this first user an admin.
-          // This is a bootstrap helper for the very first log-in.
-          const anyAdminRef = doc(db, 'admins', 'bootstrap_check');
-          const anyAdminSnap = await getDoc(anyAdminRef);
-          
-          if (!anyAdminSnap.exists()) {
-            await setDoc(adminRef, { 
-              email: user.email, 
-              role: 'super_admin',
-              createdAt: new Date().toISOString()
-            });
-            await setDoc(anyAdminRef, { initialized: true });
-            setIsAdmin(true);
-          }
+        } catch (e) {
+          console.error("Error creating demo admin record:", e);
         }
+      } else {
+        setIsAdmin(false);
       }
       setLoading(false);
     });

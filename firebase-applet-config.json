@@ -1,10 +1,10 @@
 {
-  "projectId": "remixed-project-id",
-  "appId": "remixed-app-id",
-  "apiKey": "remixed-api-key",
-  "authDomain": "remixed-auth-domain",
-  "firestoreDatabaseId": "remixed-firestore-database-id",
-  "storageBucket": "remixed-storage-bucket",
-  "messagingSenderId": "remixed-messaging-sender-id",
-  "measurementId": "remixed-measurement-id"
+  "projectId": "sunlit-unison-453703-d5",
+  "appId": "1:546483307218:web:af6259a2c73173636b230b",
+  "apiKey": "AIzaSyB47JaDnsHd_7gDM9D56ZaDlu-w6YGUUMs",
+  "authDomain": "sunlit-unison-453703-d5.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-6ffd8fff-f9f5-4a7c-9df7-102bd943adc5",
+  "storageBucket": "sunlit-unison-453703-d5.firebasestorage.app",
+  "messagingSenderId": "546483307218",
+  "measurementId": ""
 }
