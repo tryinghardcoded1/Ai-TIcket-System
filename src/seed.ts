@@ -79,8 +79,45 @@ export async function seedData() {
       totalAmount: 360,
       depositStatus: 'held'
     });
+
+    // 4. Seed Maintenance Logs
+    const maintenanceCol = collection(db, 'maintenance_logs');
     
-    // 4. Add a bootstrap admin marker
+    // Completed Log
+    await addDoc(maintenanceCol, {
+      vehicleId: vehicleIds[2] || 'unknown-porsche', // Porsche Taycan
+      serviceType: 'Brake Pad Replacement & Inspection',
+      cost: 450,
+      scheduledDate: '2026-05-10',
+      completedDate: '2026-05-11',
+      status: 'completed',
+      details: 'Replaced front dynamic carbon-ceramic brake pads. Verified caliper pressure and topped off synthetic brake fluids.',
+      createdAt: '2026-05-09'
+    });
+
+    // In Progress Log
+    await addDoc(maintenanceCol, {
+      vehicleId: vehicleIds[0] || 'unknown-tesla', // Tesla Model 3
+      serviceType: 'Tire Rotation & Wheel Alignment',
+      cost: 120,
+      scheduledDate: '2026-05-20',
+      status: 'in_progress',
+      details: 'Aligning performance multi-chassis wheels to counter highway pull. Rotating all four tread paths.',
+      createdAt: '2026-05-19'
+    });
+
+    // Pending Log
+    await addDoc(maintenanceCol, {
+      vehicleId: vehicleIds[1] || 'unknown-rivian', // Rivian R1S
+      serviceType: 'Battery Diagnostic & Software Update',
+      cost: 75,
+      scheduledDate: '2026-05-30',
+      status: 'pending',
+      details: 'Scheduled cloud software recalibration and dynamic battery cell discharge integrity tests.',
+      createdAt: '2026-05-22'
+    });
+    
+    // 5. Add a bootstrap admin marker
     await setDoc(doc(db, 'admins', 'bootstrap_check'), { initialized: true });
     
     console.log("Seeding completed successfully");

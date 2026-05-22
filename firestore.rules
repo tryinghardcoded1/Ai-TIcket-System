@@ -76,23 +76,32 @@ service cloud.firestore {
         && n.read is bool;
     }
 
-    function isValidQuote(q) {
-      return q.keys().hasAll(['customerName', 'vehicleType', 'startDate', 'endDate', 'totalAmount', 'status', 'createdAt'])
-        && q.customerName is string && q.customerName.size() <= 100
-        && q.vehicleType is string && q.vehicleType.size() <= 100
-        && q.startDate is string && q.startDate.size() <= 50
-        && q.endDate is string && q.endDate.size() <= 50
-        && q.totalAmount is number && q.totalAmount >= 0
-        && q.status in ['pending', 'accepted', 'expired']
-        && q.createdAt is string && q.createdAt.size() <= 50;
+    function isValidMaintenanceLog(m) {
+      return m.keys().hasAll(['vehicleId', 'serviceType', 'cost', 'scheduledDate', 'status', 'createdAt'])
+        && m.vehicleId is string
+        && m.serviceType is string && m.serviceType.size() <= 100
+        && m.cost is number && m.cost >= 0
+        && m.scheduledDate is string && m.scheduledDate.size() <= 50
+        && m.status in ['pending', 'in_progress', 'completed']
+        && m.createdAt is string && m.createdAt.size() <= 60
+        && (!m.keys().hasAny(['completedDate']) || m.completedDate is string)
+        && (!m.keys().hasAny(['details']) || m.details is string);
     }
 
     // --- Collections ---
 
-    match /quotes/{quoteId} {
+    match /maintenance_logs/{logId} {
       allow get, list: if isSignedIn();
-      allow create, update: if isAdmin() && isValidQuote(request.resource.data);
+      allow create, update: if isAdmin() && isValidMaintenanceLog(request.resource.data);
       allow delete: if isAdmin();
+    }
+
+    match /finances/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /transactions/{txId} {
+      allow read, write: if isSignedIn();
     }
 
     match /notifications/{notifId} {

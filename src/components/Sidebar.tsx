@@ -108,12 +108,17 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
           <SidebarItem 
             icon={LayoutDashboard} 
             label="Dashboard" 
-            isActive={activeView === 'dashboard' || activeView === 'finance'} 
+            isActive={activeView === 'dashboard'} 
+            onClick={() => setView('dashboard')}
             isOpen={isOpen}
-          >
-            <SubItem label="Overview" isActive={activeView === 'dashboard'} onClick={() => setView('dashboard')} />
-            <SubItem label="Finance" isActive={activeView === 'finance'} onClick={() => setView('finance')} />
-          </SidebarItem>
+          />
+          <SidebarItem 
+            icon={Wallet} 
+            label="Expenses" 
+            isActive={activeView === 'finance'} 
+            onClick={() => setView('finance')}
+            isOpen={isOpen}
+          />
           <SidebarItem 
             icon={Users} 
             label="Users" 
@@ -134,7 +139,6 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             isOpen={isOpen}
           >
             <SubItem label="Reservations" isActive={activeView === 'ops-reservations'} onClick={() => setView('ops-reservations')} />
-            <SubItem label="Quotes" isActive={activeView === 'ops-quotes'} onClick={() => setView('ops-quotes')} />
             <SubItem label="Calendar" isActive={activeView === 'ops-calendar'} onClick={() => setView('ops-calendar')} />
           </SidebarItem>
 

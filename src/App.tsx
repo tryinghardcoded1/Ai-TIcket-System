@@ -11,8 +11,8 @@ import LiveMap from './components/LiveMap';
 import AddCustomer from './components/AddCustomer';
 import CustomerManagement from './components/CustomerManagement';
 import FleetInventory from './components/FleetInventory';
+import FleetMaintenance from './components/FleetMaintenance';
 import RentalAgreement from './components/RentalAgreement';
-import QuoteManagement from './components/QuoteManagement';
 import CalendarView from './components/CalendarView';
 import UserManagement from './components/UserManagement';
 import Finance from './components/Finance';
@@ -103,14 +103,14 @@ export default function App() {
         return <Finance />;
       case 'users':
         return <UserManagement />;
-      case 'ops-quotes':
-        return <QuoteManagement />;
       case 'ops-calendar':
         return <CalendarView />;
       case 'renter-tracker':
         return <RenterTracker />;
       case 'fleet-map':
         return <LiveMap />;
+      case 'fleet-maintenance':
+        return <FleetMaintenance />;
       case 'contacts-customers':
         return <CustomerManagement />;
       case 'fleet-inventory':
