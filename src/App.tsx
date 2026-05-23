@@ -90,26 +90,6 @@ export default function App() {
   }
 
   const renderView = () => {
-    if (!isAdmin && ['finance', 'users'].includes(activeView)) {
-      return (
-        <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
-          <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center text-rose-500">
-            <AlertCircle className="w-8 h-8" />
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-white">Access Denied</h2>
-            <p className="text-slate-500 text-sm">You do not have the required clearance to view this sector.</p>
-            <button 
-              onClick={() => setActiveView('dashboard')} 
-              className="mt-4 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors text-xs font-bold uppercase tracking-widest"
-            >
-              Return to Command Center
-            </button>
-          </div>
-        </div>
-      );
-    }
-
     switch (activeView) {
       case 'dashboard':
         return <Dashboard />;

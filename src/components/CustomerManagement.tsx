@@ -28,6 +28,13 @@ export default function CustomerManagement() {
   const [formEmail, setFormEmail] = React.useState('');
   const [formPhone, setFormPhone] = React.useState('');
   const [formStatus, setFormStatus] = React.useState('Verified');
+  const [formAddress, setFormAddress] = React.useState('');
+  const [formCity, setFormCity] = React.useState('');
+  const [formState, setFormState] = React.useState('');
+  const [formZip, setFormZip] = React.useState('');
+  const [formCountry, setFormCountry] = React.useState('');
+  const [formDob, setFormDob] = React.useState('');
+  const [formLicenseId, setFormLicenseId] = React.useState('');
 
   React.useEffect(() => {
     if (!db) return;
@@ -75,6 +82,15 @@ export default function CustomerManagement() {
     setFormEmail(customer.email);
     setFormPhone(customer.phone || '');
     setFormStatus(customer.status || 'Verified');
+    
+    const anyC = customer as any;
+    setFormAddress(anyC.address?.street || anyC.address || '');
+    setFormCity(anyC.address?.city || anyC.city || '');
+    setFormState(anyC.address?.state || anyC.state || '');
+    setFormZip(anyC.address?.zip || anyC.zip || '');
+    setFormCountry(anyC.address?.country || anyC.country || '');
+    setFormDob(anyC.dob || '');
+    setFormLicenseId(anyC.licenseId || '');
   };
 
   const handleDeleteCustomer = async (customerId: string) => {
@@ -96,7 +112,16 @@ export default function CustomerManagement() {
         lastName: formLastName,
         email: formEmail,
         phone: formPhone,
-        status: formStatus
+        status: formStatus,
+        address: {
+          street: formAddress,
+          city: formCity,
+          state: formState,
+          zip: formZip,
+          country: formCountry
+        },
+        dob: formDob,
+        licenseId: formLicenseId
       });
       setEditingCustomer(null);
     } catch (e) {
@@ -126,25 +151,27 @@ export default function CustomerManagement() {
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 sm:gap-2">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight">Customer Directory</h1>
           <p className="text-zinc-500 text-sm mt-1">Manage client records, identities, and agreements.</p>
         </div>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
           <button 
             onClick={() => setIsAddingNew(true)}
-            className="px-4 py-2 bg-white text-black rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center gap-2"
+            className="flex-1 sm:flex-none px-4 py-2 bg-white text-black rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2"
           >
             <Plus size={14} /> New Record
           </button>
-          <CSVImporter onImport={handleImport} label="Import" />
+          <div className="flex-1 sm:flex-none">
+            <CSVImporter onImport={handleImport} label="Import" className="w-full justify-center" />
+          </div>
         </div>
       </div>
 
       <div className="bg-[#09090b] border border-[#27272a] rounded-xl overflow-hidden">
         <div className="p-4 border-b border-[#27272a] flex items-center justify-between">
-          <div className="relative w-64 group">
+          <div className="relative w-full sm:w-64 group">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 group-focus-within:text-white transition-colors" />
             <input 
               type="text" 
@@ -264,8 +291,8 @@ export default function CustomerManagement() {
               Edit Client Profile
             </h3>
 
-            <form onSubmit={handleUpdate} className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
+            <form onSubmit={handleUpdate} className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="text-[9px] font-black uppercase tracking-wider text-zinc-500 block">First Name</label>
                   <input 
@@ -299,7 +326,59 @@ export default function CustomerManagement() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <label className="text-[9px] font-black uppercase tracking-wider text-zinc-500 block">Residency Address</label>
+                <input 
+                  type="text"
+                  value={formAddress}
+                  onChange={e => setFormAddress(e.target.value)}
+                  className="w-full bg-[#18181b] border border-[#27272a] rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500/50 outline-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-[9px] font-black uppercase tracking-wider text-zinc-500 block">City</label>
+                  <input 
+                    type="text"
+                    value={formCity}
+                    onChange={e => setFormCity(e.target.value)}
+                    className="w-full bg-[#18181b] border border-[#27272a] rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500/50 outline-none"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[9px] font-black uppercase tracking-wider text-zinc-500 block">State</label>
+                  <input 
+                    type="text"
+                    value={formState}
+                    onChange={e => setFormState(e.target.value)}
+                    className="w-full bg-[#18181b] border border-[#27272a] rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500/50 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-[9px] font-black uppercase tracking-wider text-zinc-500 block">Date of Birth</label>
+                  <input 
+                    type="date"
+                    value={formDob}
+                    onChange={e => setFormDob(e.target.value)}
+                    className="w-full bg-[#18181b] border border-[#27272a] rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500/50 outline-none"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[9px] font-black uppercase tracking-wider text-zinc-500 block">License ID</label>
+                  <input 
+                    type="text"
+                    value={formLicenseId}
+                    onChange={e => setFormLicenseId(e.target.value)}
+                    className="w-full bg-[#18181b] border border-[#27272a] rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500/50 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="text-[9px] font-black uppercase tracking-wider text-zinc-500 block">Phone Connection</label>
                   <input 
