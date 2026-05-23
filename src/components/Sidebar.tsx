@@ -142,7 +142,9 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             isOpen={isOpen}
           >
             <SubItem label="Active Rentals" isActive={activeView === 'ops-reservations'} onClick={() => setView('ops-reservations')} />
+            <SubItem label="Extensions" isActive={activeView === 'ops-extensions'} onClick={() => setView('ops-extensions')} />
             <SubItem label="Calendar" isActive={activeView === 'ops-calendar'} onClick={() => setView('ops-calendar')} />
+            <SubItem label="Payment Due" isActive={activeView === 'ops-payment-due'} onClick={() => setView('ops-payment-due')} />
           </SidebarItem>
 
           <SidebarItem 
@@ -154,6 +156,16 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             <SubItem label="Inventory" isActive={activeView === 'fleet-inventory'} onClick={() => setView('fleet-inventory')} />
             <SubItem label="Live Map" isActive={activeView === 'fleet-map'} onClick={() => setView('fleet-map')} />
             <SubItem label="Maintenance" isActive={activeView === 'fleet-maintenance'} onClick={() => setView('fleet-maintenance')} />
+          </SidebarItem>
+
+          <SidebarItem 
+            icon={ShieldCheck} 
+            label="Vehicle Status" 
+            isActive={activeView.startsWith('vehicle-status')} 
+            isOpen={isOpen}
+          >
+            <SubItem label="Damages" isActive={activeView === 'vehicle-status-damages'} onClick={() => setView('vehicle-status-damages')} />
+            <SubItem label="Claims" isActive={activeView === 'vehicle-status-claims'} onClick={() => setView('vehicle-status-claims')} />
           </SidebarItem>
 
           <SidebarItem 

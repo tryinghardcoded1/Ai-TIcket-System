@@ -26,6 +26,15 @@ import { auth, db } from './firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
+import PaymentDue from './components/PaymentDue';
+import RentalExtensions from './components/RentalExtensions';
+import PaymentInsurance from './components/PaymentInsurance';
+import PaymentRentals from './components/PaymentRentals';
+import PaymentFines from './components/PaymentFines';
+import VehicleDamages from './components/VehicleDamages';
+import InsuranceClaims from './components/InsuranceClaims';
+import FormGenerator from './components/FormGenerator';
+
 export default function App() {
   const [user, setUser] = React.useState<User | null>(null);
   const [isAdmin, setIsAdmin] = React.useState(false);
@@ -105,6 +114,8 @@ export default function App() {
         return <UserManagement />;
       case 'ops-calendar':
         return <CalendarView />;
+      case 'ops-payment-due':
+        return <PaymentDue />;
       case 'renter-tracker':
         return <RenterTracker />;
       case 'fleet-map':
@@ -135,56 +146,22 @@ export default function App() {
         );
       case 'ops-reservations':
         return <ReservationManagement setView={setActiveView} />;
+      case 'ops-extensions':
+        return <RentalExtensions />;
       case 'agreement':
         return <RentalAgreement onBack={() => setActiveView('ops-reservations')} />;
       case 'payment-insurance':
-        return (
-          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
-            <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500">
-               <span className="text-2xl font-bold italic">INS</span>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Insurance Payments</h2>
-              <p className="text-slate-500 text-sm">Insurance payment tracking module is under construction.</p>
-            </div>
-          </div>
-        );
+        return <PaymentInsurance />;
       case 'payment-rentals':
-        return (
-          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
-            <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500">
-               <span className="text-2xl font-bold italic">RNT</span>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Rental Payments</h2>
-              <p className="text-slate-500 text-sm">Rental payment tracking module is under construction.</p>
-            </div>
-          </div>
-        );
+        return <PaymentRentals />;
       case 'payment-fines':
-        return (
-          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
-            <div className="w-16 h-16 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center text-red-500">
-               <span className="text-2xl font-bold italic">FIN</span>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Fines & Penalties</h2>
-              <p className="text-slate-500 text-sm">Fines payment tracking module is under construction.</p>
-            </div>
-          </div>
-        );
+        return <PaymentFines />;
+      case 'vehicle-status-damages':
+        return <VehicleDamages />;
+      case 'vehicle-status-claims':
+        return <InsuranceClaims />;
       case 'forms':
-        return (
-          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
-            <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl flex items-center justify-center text-amber-500">
-               <span className="text-2xl font-bold italic">FRM</span>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Form Generator</h2>
-              <p className="text-slate-500 text-sm">Form generator module is under construction.</p>
-            </div>
-          </div>
-        );
+        return <FormGenerator />;
       case 'settings':
         return <SystemSettings user={user} />;
       default:
