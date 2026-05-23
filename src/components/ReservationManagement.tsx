@@ -184,7 +184,7 @@ export default function ReservationManagement({ setView }: { setView: (v: string
       <div className="max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div className="flex justify-between items-end mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">New Reservation</h1>
+            <h1 className="text-2xl font-bold text-white tracking-tight">New Rental</h1>
             <p className="text-zinc-500 text-sm mt-1">Initiate a new vehicle lease record.</p>
           </div>
           <button 
@@ -259,7 +259,7 @@ export default function ReservationManagement({ setView }: { setView: (v: string
               disabled={loading}
               className="px-6 py-3 bg-white text-black rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.05)] disabled:opacity-50"
             >
-              {loading ? "Processing..." : "Create Reservation"}
+              {loading ? "Processing..." : "Create Rental"}
             </button>
           </div>
         </div>
@@ -279,7 +279,7 @@ export default function ReservationManagement({ setView }: { setView: (v: string
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Active Reservations</h1>
+          <h1 className="text-2xl font-bold text-white tracking-tight">Active Rentals</h1>
           <p className="text-zinc-500 text-sm mt-1">Manage ongoing bookings, statuses, and digital lease contracts.</p>
         </div>
         <div className="flex gap-4">
@@ -407,7 +407,7 @@ export default function ReservationManagement({ setView }: { setView: (v: string
             </button>
 
             <h3 className="text-lg font-bold text-white uppercase italic tracking-tight mb-4">
-              Edit Contract Reservation
+              Edit Rental
             </h3>
 
             <form onSubmit={handleUpdateReservation} className="space-y-4">

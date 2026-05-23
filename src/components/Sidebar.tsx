@@ -141,7 +141,7 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             isActive={activeView.startsWith('ops')} 
             isOpen={isOpen}
           >
-            <SubItem label="Reservations" isActive={activeView === 'ops-reservations'} onClick={() => setView('ops-reservations')} />
+            <SubItem label="Active Rentals" isActive={activeView === 'ops-reservations'} onClick={() => setView('ops-reservations')} />
             <SubItem label="Calendar" isActive={activeView === 'ops-calendar'} onClick={() => setView('ops-calendar')} />
           </SidebarItem>
 
