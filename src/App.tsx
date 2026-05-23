@@ -27,13 +27,11 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 import PaymentDue from './components/PaymentDue';
-import RentalExtensions from './components/RentalExtensions';
 import PaymentInsurance from './components/PaymentInsurance';
 import PaymentRentals from './components/PaymentRentals';
 import PaymentFines from './components/PaymentFines';
 import VehicleDamages from './components/VehicleDamages';
 import InsuranceClaims from './components/InsuranceClaims';
-import FormGenerator from './components/FormGenerator';
 
 export default function App() {
   const [user, setUser] = React.useState<User | null>(null);
@@ -146,10 +144,92 @@ export default function App() {
         );
       case 'ops-reservations':
         return <ReservationManagement setView={setActiveView} />;
-      case 'ops-extensions':
-        return <RentalExtensions />;
-      case 'agreement':
+      case 'ops-late-returns':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500">
+               <span className="text-2xl font-bold italic">LATE</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Late Returns</h2>
+              <p className="text-slate-500 text-sm">Late returns tracking module is under construction.</p>
+            </div>
+          </div>
+        );
+      case 'fleet-out-of-service':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-zinc-500/10 border border-zinc-500/20 rounded-2xl flex items-center justify-center text-zinc-500">
+               <span className="text-2xl font-bold italic">OOS</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Out of Service</h2>
+              <p className="text-slate-500 text-sm">Out of service module is under construction.</p>
+            </div>
+          </div>
+        );
+      case 'payment-deposits':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500">
+               <span className="text-2xl font-bold italic">DEP</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Deposits</h2>
+              <p className="text-slate-500 text-sm">Deposits tracking module is under construction.</p>
+            </div>
+          </div>
+        );
+      case 'payment-refunds':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-500">
+               <span className="text-2xl font-bold italic">REF</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Refunds</h2>
+              <p className="text-slate-500 text-sm">Refunds module is under construction.</p>
+            </div>
+          </div>
+        );
+      case 'vehicle-status-repairs':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-orange-500/10 border border-orange-500/20 rounded-2xl flex items-center justify-center text-orange-500">
+               <span className="text-2xl font-bold italic">REP</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Repair Status</h2>
+              <p className="text-slate-500 text-sm">Repair status module is under construction.</p>
+            </div>
+          </div>
+        );
+      case 'forms-agreement':
         return <RentalAgreement onBack={() => setActiveView('ops-reservations')} />;
+      case 'forms-inspection':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl flex items-center justify-center text-amber-500">
+               <span className="text-2xl font-bold italic">INSP</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Inspection Form</h2>
+              <p className="text-slate-500 text-sm">Inspection form generator is under construction.</p>
+            </div>
+          </div>
+        );
+      case 'forms-incident':
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-center space-y-4">
+            <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl flex items-center justify-center text-amber-500">
+               <span className="text-2xl font-bold italic">INC</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white uppercase tracking-widest">Incident Report</h2>
+              <p className="text-slate-500 text-sm">Incident report generator is under construction.</p>
+            </div>
+          </div>
+        );
       case 'payment-insurance':
         return <PaymentInsurance />;
       case 'payment-rentals':
@@ -160,8 +240,6 @@ export default function App() {
         return <VehicleDamages />;
       case 'vehicle-status-claims':
         return <InsuranceClaims />;
-      case 'forms':
-        return <FormGenerator />;
       case 'settings':
         return <SystemSettings user={user} />;
       default:

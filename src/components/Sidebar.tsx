@@ -116,17 +116,17 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             isOpen={isOpen}
           />
           <SidebarItem 
+            icon={Users} 
+            label="Customers" 
+            isActive={activeView === 'customers'} 
+            onClick={() => setView('customers')}
+            isOpen={isOpen}
+          />
+          <SidebarItem 
             icon={Wallet} 
             label="Expenses" 
             isActive={activeView === 'finance'} 
             onClick={() => setView('finance')}
-            isOpen={isOpen}
-          />
-          <SidebarItem 
-            icon={UserCircle} 
-            label="Customers" 
-            isActive={activeView === 'customers'} 
-            onClick={() => setView('customers')}
             isOpen={isOpen}
           />
         </div>
@@ -142,9 +142,9 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             isOpen={isOpen}
           >
             <SubItem label="Active Rentals" isActive={activeView === 'ops-reservations'} onClick={() => setView('ops-reservations')} />
-            <SubItem label="Extensions" isActive={activeView === 'ops-extensions'} onClick={() => setView('ops-extensions')} />
             <SubItem label="Calendar" isActive={activeView === 'ops-calendar'} onClick={() => setView('ops-calendar')} />
-            <SubItem label="Payment Due" isActive={activeView === 'ops-payment-due'} onClick={() => setView('ops-payment-due')} />
+            <SubItem label="Payments Due" isActive={activeView === 'ops-payment-due'} onClick={() => setView('ops-payment-due')} />
+            <SubItem label="Late Returns" isActive={activeView === 'ops-late-returns'} onClick={() => setView('ops-late-returns')} />
           </SidebarItem>
 
           <SidebarItem 
@@ -156,56 +156,42 @@ export default function Sidebar({ activeView, setView }: { activeView: string; s
             <SubItem label="Inventory" isActive={activeView === 'fleet-inventory'} onClick={() => setView('fleet-inventory')} />
             <SubItem label="Live Map" isActive={activeView === 'fleet-map'} onClick={() => setView('fleet-map')} />
             <SubItem label="Maintenance" isActive={activeView === 'fleet-maintenance'} onClick={() => setView('fleet-maintenance')} />
-          </SidebarItem>
-
-          <SidebarItem 
-            icon={ShieldCheck} 
-            label="Vehicle Status" 
-            isActive={activeView.startsWith('vehicle-status')} 
-            isOpen={isOpen}
-          >
-            <SubItem label="Damages" isActive={activeView === 'vehicle-status-damages'} onClick={() => setView('vehicle-status-damages')} />
-            <SubItem label="Claims" isActive={activeView === 'vehicle-status-claims'} onClick={() => setView('vehicle-status-claims')} />
+            <SubItem label="Out of Service" isActive={activeView === 'fleet-out-of-service'} onClick={() => setView('fleet-out-of-service')} />
           </SidebarItem>
 
           <SidebarItem 
             icon={CreditCard} 
-            label="Payment" 
+            label="Billing" 
             isActive={activeView.startsWith('payment')} 
             isOpen={isOpen}
           >
-            <SubItem label="Insurance" isActive={activeView === 'payment-insurance'} onClick={() => setView('payment-insurance')} />
-            <SubItem label="Rentals" isActive={activeView === 'payment-rentals'} onClick={() => setView('payment-rentals')} />
-            <SubItem label="Fines" isActive={activeView === 'payment-fines'} onClick={() => setView('payment-fines')} />
+            <SubItem label="Rental Payments" isActive={activeView === 'payment-rentals'} onClick={() => setView('payment-rentals')} />
+            <SubItem label="Deposits" isActive={activeView === 'payment-deposits'} onClick={() => setView('payment-deposits')} />
+            <SubItem label="Refunds" isActive={activeView === 'payment-refunds'} onClick={() => setView('payment-refunds')} />
+            <SubItem label="Fines & Tolls" isActive={activeView === 'payment-fines'} onClick={() => setView('payment-fines')} />
+          </SidebarItem>
+
+          <SidebarItem 
+            icon={ShieldCheck} 
+            label="Damages / Claims" 
+            isActive={activeView.startsWith('vehicle-status')} 
+            isOpen={isOpen}
+          >
+            <SubItem label="Damage Photos" isActive={activeView === 'vehicle-status-damages'} onClick={() => setView('vehicle-status-damages')} />
+            <SubItem label="Repair Status" isActive={activeView === 'vehicle-status-repairs'} onClick={() => setView('vehicle-status-repairs')} />
+            <SubItem label="Insurance Claims" isActive={activeView === 'vehicle-status-claims'} onClick={() => setView('vehicle-status-claims')} />
           </SidebarItem>
 
           <SidebarItem 
             icon={ClipboardList} 
             label="Forms" 
-            isActive={activeView === 'forms'} 
-            onClick={() => setView('forms')}
+            isActive={activeView.startsWith('forms')} 
             isOpen={isOpen}
-          />
-        </div>
-
-        <div>
-          <p className={cn("px-4 mb-4 text-[10px] font-bold text-zinc-600 uppercase tracking-widest", !isOpen && "hidden")}>
-            Strategy
-          </p>
-          <SidebarItem 
-            icon={Navigation} 
-            label="Renter Tracker" 
-            isActive={activeView === 'renter-tracker'} 
-            onClick={() => setView('renter-tracker')}
-            isOpen={isOpen}
-          />
-          <SidebarItem 
-            icon={ShieldCheck} 
-            label="Compliance" 
-            isActive={activeView === 'compliance'} 
-            onClick={() => setView('compliance')}
-            isOpen={isOpen}
-          />
+          >
+            <SubItem label="Rental Agreement" isActive={activeView === 'forms-agreement'} onClick={() => setView('forms-agreement')} />
+            <SubItem label="Inspection Form" isActive={activeView === 'forms-inspection'} onClick={() => setView('forms-inspection')} />
+            <SubItem label="Incident Report" isActive={activeView === 'forms-incident'} onClick={() => setView('forms-incident')} />
+          </SidebarItem>
         </div>
       </div>
 
